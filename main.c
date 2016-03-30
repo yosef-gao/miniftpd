@@ -11,6 +11,7 @@ void handle_sig_chld(int sig);
 
 int main(int argc, char *argv[])
 {
+    daemon(1, 0);
     // list_common(NULL);
     //  测试配置文件读取
     parseconf_load_file(MINIFTP_CONF);
@@ -81,7 +82,7 @@ int main(int argc, char *argv[])
 
 
     signal(SIGCHLD, handle_sig_chld);
-    int listenfd = tcp_server(tunable_listen_address, 5188);
+    int listenfd = tcp_server(tunable_listen_address, 21);
     int conn;
     pid_t pid;
     num_child = 0;
