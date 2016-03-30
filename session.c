@@ -2,9 +2,12 @@
 #include "common.h"
 #include "ftpproto.h"
 #include "privparent.h"
+#include "sysutil.h"
 
 void begin_session(session_t *sess)
 {
+    activate_oobinline(sess->ctrl_fd);
+
     int sockfd[2];
     if (socketpair(AF_UNIX, SOCK_STREAM, 0, sockfd) < 0)
         err_sys("socketpair");
